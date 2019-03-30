@@ -5,11 +5,13 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import * as firebase from 'firebase';
 
-const PatternV = [1000];
-
 /*	
 	Taken:
 	
+	1. Registratie Login
+	2. Signout ofc
+
+
 	1. Fix een DBS connectie
 	2. zorg ervoor nadat er is ingelogd een andere pagina displayed met je gebruikersnamen etc.
 */
@@ -56,9 +58,9 @@ class LoginScreen extends React.Component
 		.then(() => {
 			isLoggedIn = true;
 			// Vibrates the Phone when logged in
-			Vibration.vibrate(PatternV);
 			this.props.navigation.navigate('Data'); 
 			alert("Welcome!");
+			Vibration.vibrate(1000);
 		}).catch((error) => {
 			alert(`Something went wrong!! ${error}`);
 		});
@@ -79,8 +81,8 @@ class LoginScreen extends React.Component
 		if(this.state.isLoggedIn){
 			return(
 				<View style={styles.containerStyle}>
-					<Text style={{fontSize: 30}}>Welcome {this.state.email}</Text>
-					<Text style={{fontSize: 30}}>If you want a little more information about the App navigate your way to the About page!</Text>
+					<Text style={{fontSize: 25}}>Welcome <Text style={{fontColor: 'cornflowerblue'}}>{this.state.email}</Text></Text>
+					<Text style={{marginTop: 45}}>Want to Log out? Press the button</Text>
 					<Button title="Logout" onPress={this.onLogoutPress} style={styles.buttonStyle} />
 				</View>
 			);
@@ -90,9 +92,8 @@ class LoginScreen extends React.Component
 				<View style={styles.containerStyle}>				
 					<Text style={{fontSize: 30}}>Welcome to </Text>
 					<Text style={{fontSize: 22, color: 'cornflowerblue'}}>Shelson's Password Manager</Text>
-					<Text style={{fontSize: 22}}>Please make sure to Login</Text>
 					
-					<TextInput onChangeText={(text) => this.setState({email: text})} style={styles.inputStyleTop}  underlineColorAndroid= "transparent" placeholder="Name" placeholderTextColor="darkgray" autoCapitalize="none" />
+					<TextInput onChangeText={(text) => this.setState({email: text})} style={styles.inputStyleTop}  underlineColorAndroid= "transparent" placeholder="Your Email adress" placeholderTextColor="darkgray" autoCapitalize="none" />
 					<TextInput secureTextEntry={true} onChangeText={(text) => this.setState({pass: text})} style={styles.inputStyleBot} underlineColorAndroid= "transparent" placeholder="Password" placeholderTextColor="darkgray" autoCapitalize="none" />
 					<Button onPress={this.onLoginPress} style={styles.buttonStyle} title="Login" />
 				</View>
@@ -104,24 +105,44 @@ class LoginScreen extends React.Component
 
 class InfoScreen extends React.Component 
 {
+	constructor(props){
+		super(props);
+		this.state = {
+			isLoggedIn: isLoggedIn
+		};
+	}
+
+	componentDidFocus(){
+		this.setState({
+			isLoggedIn: isLoggedIn,
+		});
+	}
+
 	render(){
-		return(
-			<View style={styles.containerStyle}>	
-				<Text style={{fontSize: 40, margin:20}}>About</Text>
-				<Text>
-					Simple Application for mobile to your details.
-				</Text>
-				<Text>
-						Make sure you have an account before usage.						
-				</Text>
-				<Text>
-					This application has been made by Shelson.
-				</Text>
-				<Text style={{color: 'blue'}}>
-					Click here to make an Account
-				</Text>
+		if(this.state.isLoggedIn){
+			<View style={styles.containerStyle}>
+				<Text style={{fontSize: 40, margin:20, color: 'cornflowerblue'}}>About</Text>
+			
+				<Text>A Simple application for you to save your Account Details!</Text>
+				<Text>You'll find your account details  in the <Text style={{color: 'cornflowerblue'}}>Data tab</Text></Text>
+
+				<Text style={{fontSize: 10, marginTop: 50, color: 'red'}}>Something went wrong?! Make sure to contact me!</Text>
 			</View>
-		);
+		}
+		else {
+			return(
+				<View style={styles.containerStyle}>	
+					<Text style={{fontSize: 40, margin:20, color: 'cornflowerblue'}}>About</Text>
+					
+					<Text>A Simple application for you to save your Account Details!</Text>
+					<Text>Make sure you have an account before usage</Text>
+					<Text style={{color: 'red', marginTop: 30}}>Make sure you're logged in first!</Text>
+	
+					<Text style={{color: 'blue', marginTop: 20, fontWeight: 'bold'}}>Click here to make an Account</Text>
+				</View>
+			);
+		}
+		
 	}
 }
 
@@ -157,7 +178,7 @@ class DataScreen extends React.Component
 		else{
 			return(
 				<View style={styles.containerStyle}>
-					<Text>Log in first!</Text>
+					<Text style={{fontSize: '30', color: 'red'}}>Log in first!</Text>
 				</View>
 			);
 		}
