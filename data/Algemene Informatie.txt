@@ -1,0 +1,9 @@
+IP to connect to local php script: 
+http://10.244.25.209/A_PHP/PM/data/Script.php
+
+
+Usefull sites: 
+
+- https://reactnativecode.com/connect-run-apps-using-localhost/
+- https://stackoverflow.com/questions/10064630/how-can-i-access-my-localhost-server-from-other-computers
+- https://www.codeproject.com/Tips/395286/How-to-Access-WAMP-Server-in-LAN-or-WAN

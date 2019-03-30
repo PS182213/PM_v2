@@ -1,0 +1,9 @@
+moet voor aankomende Maandag/Donderdag af!
+
+De dingen die nog gedaan moeten worden
+
+* Connectie maken met DBS
+* Inlog systeem maken.
+* Pagina maken waar de data wordt gedisplayed van de gebruiker.
+* Styling toepassen (Mooier maken en verbeteren) 
+* Inleveren / Klaar. 
