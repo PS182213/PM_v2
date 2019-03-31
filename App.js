@@ -6,6 +6,9 @@ import {Col, Row, Grid} from 'react-native-easy-grid';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as firebase from 'firebase';
 
+// V2 //
+
+
 /*	
 	Taken:
 	
