@@ -11,14 +11,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 const overrideRenderItem = ({ item, index, section: { title, data } }) => <Text key={index}>Override{item}</Text>
 /*	
-	Taken:
-	
-	1. Registratie Login
-	2. Signout ofc
-
-
-	1. Fix een DBS connectie
-	2. zorg ervoor nadat er is ingelogd een andere pagina displayed met je gebruikersnamen etc.
+	Nieuwste en recentste versie van de Applicatie!
 */
 
 let isLoggedIn = false;
@@ -216,18 +209,23 @@ class DataScreen extends React.Component
 				<Grid>
 					<Row size={50}>
 						<View style={styles.containerStyle}>
+							
 							<Text style={{marginTop: 30, color: '#fff', fontSize: 30}}>Enter your Data here:</Text>
 
 							<TextInput onChangeText={(text) => this.setState({voor: text})}  underlineColorAndroid="transparent" placeholder="For:" placeholderTextColor="darkgray" style={styles.inputDataSpecial} />
+							
 							<TextInput onChangeText={(text) => this.setState({naam: text})}  underlineColorAndroid="transparent" placeholder="Username:" placeholderTextColor="darkgray" autoCapitalize="none"  style={styles.inputData} />
+							
 							<TextInput onChangeText={(text) => this.setState({ww: text})} secureTextEntry={true} underlineColorAndroid="transparent" placeholder="Password:" placeholderTextColor="darkgray" autoCapitalize="none"  style={styles.inputData} />	
+							
 							<TouchableOpacity onPress={this.addData} style={styles.buttonStyle}>
 								<Text style={{color: '#fff'}}>Add</Text>
 							</TouchableOpacity>
+						
 						</View>
 					</Row>
 					<Row size={50}>
-						<View style={styles.containerStyle}>
+						<View style={styles.containerSpecial}>
 							{
 								this.state.data.map((item, index) => (
 								<TouchableOpacity style={styles.listItem} key={item.for} onPress={() => this.checkNames(item)}>
@@ -291,6 +289,13 @@ const styles = StyleSheet.create({
 		width: 400,
 		padding: 10,
 		marginTop: 50
+	},
+	
+	containerSpecial: {
+		alignItems: 'center', 
+		flex: 2,
+		backgroundColor: 'rgb(111, 111, 111)',
+		fontFamily: 'Roboto'
 	},
 	
 	inputStyleBot: {
