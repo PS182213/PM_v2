@@ -1,3 +1,4 @@
-color 0F
+color BF
+npm install
 npm start
 start /k
