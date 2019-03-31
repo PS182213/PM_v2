@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Vibration, ListView, Activit
 import {createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import {Col, Row, Grid} from 'react-native-easy-grid';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import * as firebase from 'firebase';
 
 /*	
@@ -17,7 +18,6 @@ import * as firebase from 'firebase';
 */
 
 let isLoggedIn = false;
-
 
 class LoginScreen extends React.Component 
 {
@@ -171,14 +171,18 @@ class DataScreen extends React.Component
 		if(this.state.isLoggedIn){
 			return(
 				<View style={styles.containerStyle}>
-					<Text>Hij werkt joepie</Text>
+					<Text>Voeg gegevens toe</Text>
+					
+					<TextInput underlineColorAndroid="transparent" placeholder="Username" placeholderTextColor="darkgray" autoCapitalize="none"  />
+					<TextInput underlineColorAndroid="transparent" placeholder="Password" placeholderTextColor="darkgray" autoCapitalize="none"  />
+
 				</View>
 			);
 		}
 		else{
 			return(
 				<View style={styles.containerStyle}>
-					<Text style={{fontSize: '30', color: 'red'}}>Log in first!</Text>
+					<Text style={{fontSize: 30, color: 'red'}}>Log in first!</Text>
 				</View>
 			);
 		}
@@ -186,17 +190,29 @@ class DataScreen extends React.Component
 }
 
 const bottomNav = createMaterialBottomTabNavigator({
-	Home: { screen: LoginScreen },
-	Info: { screen: InfoScreen },
-	Data: {screen: DataScreen}
+	Home: { screen: LoginScreen , navigationOptions: {
+		tabBarLabel: 'Home',
+		tabBarColor: '#333',
+		tabBarIcon: (<Icon name="home" size={28} color={'#fff'} />) 
+	} },
+	Info: { screen: InfoScreen, navigationOptions: {
+		tabBarLabel: 'Info',
+		tabBarColor: '#cc00cc',
+		tabBarIcon: (<Icon name="info" size={28} color={'#fff'} />)
+	} },
+	Data: {screen: DataScreen, navigationOptions: {
+		tabBarLabel: 'Account Details',
+		tabBarColor: '#cc0066',
+		tabBarIcon: (<Icon name="user" size={28} color={'#fff'} />)
+	}}
 },
 {
 	initialRouteName: 'Home', 
-	activeColor: 'white',
-	inactiveColor: '#333',
-	fontStyle: 'bold', 
-	justifyContent: 'center',
-	barStyle: { backgroundColor: 'cornflowerblue'}
+	activeColor: '#fff',
+	inactiveTintColor: '#333',
+	shifting: true,
+
+	
 });
 
 export default createAppContainer(bottomNav);
@@ -228,7 +244,9 @@ const styles = StyleSheet.create({
 		fontFamily: 'Verdana'
 	},
 	
-	infoText: {
+	inputData: {
+		borderWidth: 1, 
+		borderColor: '#333',
 		
 	},
 	
